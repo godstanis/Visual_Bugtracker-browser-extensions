@@ -2,6 +2,11 @@
     "name": "BugWall helper",
     "version": "1.0",
     "description": "bugwall.ru editor extended functionallity extension",
+    "applications": {
+        "gecko": {
+            "id": "stasgarcia@gmail.com"
+        }
+    },
     "icons": {
         "48": "icon.png"
     },
