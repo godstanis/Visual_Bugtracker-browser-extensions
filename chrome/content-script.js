@@ -8,7 +8,7 @@ function messagePageScript() {
     let url = contentInvoker.getAttribute('data-href');
     let csrf = contentInvoker.getAttribute('data-token');
     
-    setTimeout(function(){
+    setTimeout(function() {
         sendMessage(url, csrf);
     }, 100)
 }
@@ -16,8 +16,7 @@ function messagePageScript() {
 /*
     Send message with url to image saving module
 */
-function sendMessage(url, csrf)
-{
+function sendMessage(url, csrf) {
     // Make a simple request:
     chrome.runtime.sendMessage(
         {screenshot: {
@@ -33,26 +32,22 @@ function sendMessage(url, csrf)
 /*
     Show/hide all controls on page (to make a screenshot without editor buttons)
 */
-function showEditorControls(show)
-{
+function showEditorControls(show) {
     let controls_collection = document.getElementsByClassName('editor-controls');
 
     for(let i = 0; i < controls_collection.length; i++)
     {
-        if(show === false)
-        {
+        if(show === false) {
             controls_collection[i].style.display = 'none';
         }
-        else
-        {
+        else {
             controls_collection[i].style.display = 'block';
         }
     }
-    console.log(show+'_hide_end: '+Date.now());
 }
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-   if (msg.action == 'showEditorControls') {
+   if (msg.action === 'showEditorControls') {
     console.log('show_elements');
         showEditorControls(true);
    }
@@ -62,6 +57,5 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     Add messagePageScript() as a listener to click events on
     the "screenshotBoard" element.
 */
-console.log('test extension');
 let contentInvoker = document.getElementById("screenshotBoard");
 contentInvoker.addEventListener("click", messagePageScript);
