@@ -38,10 +38,13 @@ function createImage(request) {
         console.log('captured: '+Date.now());
 
         function sendScreenshot(image){
-            
+
+            let uniqid_board_name = 'Screenshot #' + Math.random().toString(36).substr(2, 5);
+
             let formData = new FormData();
             formData.append('_token', request.screenshot.csrf);
-            formData.append('board_image', image, 'image_file.jpg');
+            formData.append('image', image, 'image_file.jpg');
+            formData.append('name', uniqid_board_name);
 
             $.ajax({
                 type: 'POST',

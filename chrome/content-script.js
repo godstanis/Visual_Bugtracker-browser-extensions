@@ -4,24 +4,22 @@
 function messagePageScript() {
 
     showEditorControls(false);
-    
-    let editorExtensionId = "gkjmkbcpafpohigodhjgehnadohgnibm";
 
     let url = contentInvoker.getAttribute('data-href');
     let csrf = contentInvoker.getAttribute('data-token');
     
     setTimeout(function(){
-        sendMessage(editorExtensionId, url, csrf);
+        sendMessage(url, csrf);
     }, 100)
 }
 
 /*
     Send message with url to image saving module
 */
-function sendMessage(editorId, url, csrf)
+function sendMessage(url, csrf)
 {
     // Make a simple request:
-    chrome.runtime.sendMessage(editorId, 
+    chrome.runtime.sendMessage(
         {screenshot: {
             'user_id': 123,
             'project_id': 123,
@@ -50,7 +48,7 @@ function showEditorControls(show)
             controls_collection[i].style.display = 'block';
         }
     }
-    console.log(show+'_hidde_end: '+Date.now());
+    console.log(show+'_hide_end: '+Date.now());
 }
 
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
@@ -64,5 +62,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     Add messagePageScript() as a listener to click events on
     the "screenshotBoard" element.
 */
+console.log('test extension');
 let contentInvoker = document.getElementById("screenshotBoard");
 contentInvoker.addEventListener("click", messagePageScript);
